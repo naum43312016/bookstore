@@ -1,0 +1,32 @@
+﻿@model BookStore.Models.Book
+@{
+    ViewData["Title"] = "Create";
+    var categories = ViewData["categories"] as IEnumerable<Category>;
+}
+
+    <div class="container">
+        <form class="bootstrap-form-with-validation" enctype="multipart/form-data" method="post" asp-controller="Product" asp-action="Create">
+            <div class="form-group"><label for="Name-input">Book Name</label><input required asp-for="@Model.Name" class="form-control" type="text" id="Name-input"></div>
+            <div class="form-group"><label for="Author-input">Author Name</label><input required asp-for="@Model.Author" class="form-control" type="text" id="Author-input"></div>
+            <div class="form-group"><label for="Price-input">Price</label><input required class="form-control" type="text" id="Price-input" name="price"></div>
+            <div class="form-group"><label for="Description-input">Description </label><textarea required asp-for="@Model.Description" class="form-control" id="Description-input"></textarea></div>
+            <div class="form-group"><label for="Quantity-input">Quantity </label><input required asp-for="@Model.Quantity" class="form-control" type="number" id="Quantity-input"></div>
+            <div class="form-group"><label for="Year-input">Year </label><input required asp-for="@Model.Year" class="form-control" type="text" id="Year-input"></div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <select asp-for="@Model.CategoryId" required class="form-control">
+                    @foreach (var cat in categories)
+                    {
+                        <option value="@cat.Id">@cat.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input required type="file" name="photos" class="form-control-file">
+            </div>
+            <div class="form-group"><button class="btn btn-primary" type="submit">Create</button></div>
+        </form>
+    </div>
+

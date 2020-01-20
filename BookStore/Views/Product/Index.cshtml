@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Book>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container my-2">
+    <div class="row">
+        <div class="col-12 align-content-end">
+            <a asp-controller="Product" asp-action="Create" class="btn btn-primary float-right">Create</a>
+        </div>
+    </div>
+</div>
+@if (Model == null)
+{
+    <p>Book not exists...</p>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+
+                <!-- Shopping cart table -->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="p-2 px-3 text-uppercase">Book</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Author</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Price</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Quantity</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Edit</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Remove</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @foreach(var book in Model)
+                            {
+                            <tr>
+                                <th scope="row" class="border-0">
+                                    <div class="p-2">
+                                        <img src="/@book.Image" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                        <div class="ml-3 d-inline-block align-middle">
+                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">@book.Name</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: @book.Category.Name</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="border-0 align-middle"><strong>@book.Author</strong></td>
+                                <td class="border-0 align-middle"><strong>$@book.Price</strong></td>
+                                <td class="border-0 align-middle"><strong>@book.Quantity</strong></td>
+                                <td class="border-0 align-middle">
+                                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@book.Id" class="text-dark">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                                <td class="border-0 align-middle"><a asp-controller="Product" asp-action="Remove" asp-route-id="@book.Id" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                            }
+
+                            
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- End -->
+            </div>
+        </div>
+    </div>
+
+}
+

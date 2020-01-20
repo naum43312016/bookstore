@@ -1,0 +1,287 @@
+﻿@model BookStore.Models.Book
+@{
+    ViewData["Title"] = "ProductDetails";
+}
+
+<br />
+<section id="details-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 d-flex justify-content-center order-1 order-sm-1 order-md-1 order-lg-1 order-xl-1"><img src="/../@Model.Image" style="width: 258px;height: 400px;"></div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 offset-0 offset-sm-0 offset-md-2 offset-lg-0 offset-xl-0 order-2 order-sm-2 order-md-2 order-lg-2 order-xl-2">
+                <div>
+                    <h3>@Model.Name<br></h3>
+                    <p style="margin-bottom: 2px;">
+                        <i class="fa fa-star" style="color: rgb(255,245,0);"></i><i class="fa fa-star" style="color: rgb(255,245,0);"></i><i class="fa fa-star" style="color: rgb(255,245,0);"></i><i class="fa fa-star" style="color: rgb(255,245,0);"></i>&nbsp;
+                        4.00
+                    </p>
+                    <p>By (author)&nbsp;&nbsp;<a href="">@Model.Author</a><br></p>
+                </div>
+                <p>
+                    @Model.Description
+                </p>
+            </div>
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 order-3 order-sm-3 order-md-3 order-lg-3 order-xl-3">
+                <div>
+                    <h1 style="color: rgb(195,17,188);">$@Model.Price</h1>
+                    <h6 style="font-size: 19px;font-family: Alegreya, serif;"><i class="fa fa-rocket" style="font-size: 23px;color: rgb(35,64,170);"></i><strong>&nbsp;Free delivery worldwide</strong><br></h6>
+                    <a href="#" id="myPopover" onclick="add(@Model.Id)" data-toggle="popover" data-trigger="focus" data-content="Product Successfully added to your Cart!" class="btn btn-primary" style="width: 100%;">Add to basket</a>
+                    <!--<i class="fas fa-shopping-cart"></i> Add to cart </a>-->
+
+                </div>
+            </div>
+        </div>
+        <h2 style="margin-top: 16px;">People who bought this also bought<br></h2>
+    </div>
+
+    <!--Carousel-->
+    <div class="container">
+        <div class="row">
+            <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <div class="MultiCarousel-inner">
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/../@Model.Image" style="width: 92px;height: 140px;">
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;">Sword Of Destiny</p>
+                                    <p style="margin-bottom: 2px;font-family: Alegreya, serif;font-weight: bold;">Andjei Sapkowski</p>
+                                    <p style="margin-bottom: 2px;">rating</p>
+                                    <p style="margin-bottom: 2px;color: rgb(204,0,255);">$19.99</p><button class="btn btn-primary" type="button" style="width: 100%;">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary leftLst"><</button>
+                <button class="btn btn-primary rightLst">></button>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+<script>
+
+
+    function add(id) {
+        var product = {
+            productId: id,
+            count: "1"
+        };
+        $.ajax({
+            url: "/api/addToCart",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(product),
+            success: function (response) {
+                response ? success() : fail();
+            }
+        });
+
+        function success() {
+
+            $("[data-toggle='popover']").popover('show');
+            setTimeout(function () { $("[data-toggle='popover']").popover('hide'); }, 2000);
+        }
+        function fail() {
+            alert("It didn't work!")
+        }
+    }
+</script>
+

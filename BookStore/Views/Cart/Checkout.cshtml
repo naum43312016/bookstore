@@ -1,0 +1,151 @@
+﻿@using BookStore.Models.ViewModel
+@model BookStore.Models.Order
+@{
+    ViewData["Title"] = "CheckOut";
+    var total = (double)ViewData["total"];
+    var note = ViewData["note"];
+    var cartVM = ViewData["cartVM"] as List<CartViewModel>;
+}
+
+@if (cartVM == null || cartVM.Count() < 1)
+{
+    <p>No books in cart...</p>
+}
+else
+{
+<div>
+    <div class="container-fluid">
+        <h1>Order Information</h1>
+        <hr>
+        <form id="contactForm" asp-controller="Order" asp-action="Submit" method="post">                                                                                                                                                                                                                      
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div id="successfail"></div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-12 col-md-6" id="message">
+                    <h2 class="h4">
+                        Order<small><small class="required-input">&nbsp;(*required)</small></small>
+                    </h2>
+                    <div class="form-group">
+                        <label for="from-name">Name</label><span class="required-input">*</span>
+                        <div class="input-group">
+                            <input asp-for="@Model.Name" class="form-control" type="text" id="from-name" required placeholder="Full Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="from-email">Email</label><span class="required-input">*</span>
+                        <div class="input-group">
+                            @{ 
+                                var email = "";
+                                if (Model.Email != null)
+                                {
+                                    email = Model.Email;
+                                    <input hidden asp-for="@Model.UserId"/>
+                                }
+                            }
+                            <input class="form-control" asp-for="@Model.Email" type="text" id="from-email" required placeholder="Email Address" value="@email">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                            <div class="form-group">
+                                <label for="from-phone">Phone</label><span class="required-input">*</span>
+                                <div class="input-group">
+                                    <input asp-for="@Model.Phone" class="form-control" type="text" id="from-phone" required placeholder="Primary Phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                            <div class="form-group">
+                                <label for="from-phone">Country</label><span class="required-input">*</span>
+                                <div class="input-group">
+                                    <input asp-for="@Model.Country" class="form-control" type="text" required placeholder="Country">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                            <div class="form-group">
+                                <label for="from-phone">City</label><span class="required-input">*</span>
+                                <div class="input-group">
+                                    <input asp-for="@Model.City" class="form-control" type="text" required placeholder="City">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                            <div class="form-group">
+                                <label for="from-phone">Adress</label><span class="required-input">*</span>
+                                <div class="input-group">
+                                    <input asp-for="@Model.Adress" class="form-control" type="text" required placeholder="Adress">
+                                </div>
+                            </div>
+                        </div>
+                        <input hidden asp-for="@Model.Total" value="@total"/>
+                    </div>
+                    <div class="form-group"><label for="from-comments">Comments</label><textarea class="form-control"  id="from-comments" asp-for="@Model.Note" placeholder="Enter Comments" rows="5">@note</textarea></div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col"><button class="btn btn-primary btn-block" type="reset"><i class="fa fa-undo"></i> Cancel</button></div>
+                            <div class="col"><button class="btn btn-primary btn-block" type="submit">Place Order <i class="fa fa-chevron-circle-right"></i></button></div>
+                        </div>
+                    </div>
+                    <hr class="d-flex d-md-none">
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2 class="h4">Books:</h2>
+                    <div class="form-row">
+                        <!-- Shopping cart table -->
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="p-2 px-3 text-uppercase">Book</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Price</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Quantity</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var cart in cartVM)
+                                    {
+                                        <tr>
+                                            <th scope="row" class="border-0">
+                                                <div class="p-2">
+                                                    <div class="ml-3 d-inline-block align-middle">
+                                                        <h5 class="mb-0"> <a target="_blank" asp-controller="Home" asp-action="ProductDetails" asp-route-id="@cart.Book.Id" class="text-dark d-inline-block align-middle">@cart.Book.Name</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: @cart.Book.Category.Name</span>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="border-0 align-middle"><strong>$@cart.Book.Price</strong></td>
+                                            <td class="border-0 align-middle"><strong>@cart.Count</strong></td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <th scope="row" class="border-0">
+                                            <div class="p-2">
+                                                <div class="ml-3 d-inline-block align-middle">
+                                                    <h3>Total: $@total</h3>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr />
+                            
+                        </div>
+                        <!-- End -->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+}
+

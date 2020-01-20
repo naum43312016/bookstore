@@ -1,0 +1,254 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BookStore</title>
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />-->
+    <link rel="stylesheet" href="~/css/site.css" />
+
+
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya:400,500,700,700i,800,800i,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alex+Brush">
+    <link rel="stylesheet" href="~/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/Animated-Pretty-Product-List-v12.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+    <link rel="stylesheet" href="~/css/Sidebar-Menu-1.css">
+    <link rel="stylesheet" href="~/css/Sidebar-Menu-2.css">
+    <link rel="stylesheet" href="~/css/Sidebar-Menu-3.css">
+    <link rel="stylesheet" href="~/css/Sidebar-Menu.css">
+    <link rel="stylesheet" href="~/css/Data-Table.css">
+    <link rel="stylesheet" href="~/css/Data-Table-1.css">
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="~/css/carousel.css">
+
+
+
+
+</head>
+<body>
+    <section id="hero">
+        <nav class="navbar navbar-light navbar-expand-md" style="background: #403042;">
+            <div class="container-fluid">
+                <div id="wrapper" class="toggled" style="/*padding-left: 250px;*/">
+                    <div id="sidebar-wrapper">
+                        <ul class="sidebar-nav">
+                            <li class="sidebar-brand"> <a class="active" href="/">Home </a></li>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li>
+                                    <a a href="#">Hello @User.Identity.Name!</a>
+                                </li>
+
+                                <li>
+                                    <a asp-controller="User" asp-action="LogOut">Logout</a>
+                                </li>
+                                <li>
+                                    <div>
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Admin Panel</a>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" role="presentation" asp-controller="Category" asp-action="Index" style="color: #0b0000;">Categories</a>
+                                                <a class="dropdown-item" role="presentation" asp-controller="Product" asp-action="Index" style="color: rgb(0,0,0);">Product</a>
+                                                <a class="dropdown-item" role="presentation" asp-controller="AdminOrder" asp-action="Index" style="color: rgb(0,0,0);">Orders</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <li> <a href="#" data-toggle="modal" data-target="#signup">Sign Up</a></li>
+                                <li> <a href="#" data-toggle="modal" data-target="#signin">Log In</a></li>
+                            }
+
+                            <li> <a asp-controller="Cart" asp-action="Index">Cart</a></li>
+
+                            <li>
+                                <div>
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Categories</a>
+                                        <div class="dropdown-menu" id="categorylist" role="menu">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="page-content-wrapper">
+                        <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle" style="color: white;width: 30px;height: 37px;padding-top: 3px;font-size: 21px;"><i class="fa fa-bars"></i></a></div>
+                    </div>
+                </div>
+                <ul class="nav navbar-nav d-flex flex-row">
+                    <li class="nav-item navitemhide" role="presentation" style="margin-right: 5px;"><a class="nav-link" data-bs-hover-animate="pulse" asp-controller="Cart" asp-action="Index" style="color: #ffffff;">Cart</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+
+                        <li class="nav-item navitemhide" role="presentation" style="margin-right: 5px;">
+                            <a class="nav-link" data-bs-hover-animate="pulse" style="color: #ffffff;" asp-controller="User" asp-action="LogOut">Logout</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item navitemhide" role="presentation" style="margin-right: 5px;"><a class="nav-link" data-bs-hover-animate="pulse" href="#" data-toggle="modal" data-target="#signin" style="color: #ffffff;">Log In</a></li>
+                        <li class="nav-item navitemhide" role="presentation" style="margin-right: 5px;"><a class="nav-link" data-bs-hover-animate="pulse" href="#" data-toggle="modal" data-target="#signup" style="color: #ffffff;">Sign Up</a></li>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </section>
+    <section data-aos="fade" data-aos-duration="550" id="search-section">
+        <div class="container" style="padding-bottom: 5px;">
+            <div class="row my-auto">
+                <div class="col-1 col-sm-6 col-md-2 col-lg-2 col-xl-2 flex-column justify-content-start my-auto" id="book-heading">
+                    <h4 class="text-white" style="font-family: 'Alex Brush', cursive;padding-top: 3px;">Book</h4>
+                    <h3 class="text-white" style="font-family: 'Alex Brush', cursive;">Store</h3>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 align-items-center order-3 my-auto order-sm-3 order-md-2 order-lg-2 justify-content-xl-center order-xl-2">
+                    <form method="get" asp-controller="Home" asp-action="Search" class="flex-row justify-content-center align-items-center align-content-center">
+                        <div class="form-row d-flex flex-row justify-content-center align-items-center align-content-center mx-auto justify-content-xl-center my-auto" style="text-align: center;">
+                            <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10" style="/*margin-top: 25px;*/">
+                                <div class="form-group my-auto"><input name="searchInput" class="form-control" type="text"></div>
+                            </div>
+                            <div class="col-2" style="/*margin-top: 25px;*/">
+                                <div class="form-group my-auto"><button class="btn btn-primary" type="submit">Search</button></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-3 col-sm-6 col-md-3 col-lg-2 col-xl-3 offset-2 offset-sm-0 offset-md-0 offset-lg-0 offset-xl-0 justify-content-center align-items-center order-2 my-auto order-sm-2 order-md-3 order-lg-3 order-xl-3" style="/*margin-top: 25px;*/width: 300px;"><button class="btn btn-outline-primary text-white" id="advanc-btn" type="button">Advanced Search</button></div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <div class="container-fluid">
+
+        <div class="modal fade" role="dialog" tabindex="-1" id="signin">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Sign In</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" asp-controller="User" asp-action="SignIn">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text"><i class="fa fa-envelope-o"></i></span></div><input name="email" class="form-control" type="email" required="" placeholder="Email">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text"><i class="fa fa-lock"></i></span></div><input name="password" class="form-control" type="password" required="" placeholder="Password">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group"><button class="btn btn-primary btn-lg text-white" style="width: 100%;" type="submit">Log in</button></div>
+                        </form>
+                        <p class="text-danger" id="sign-in-error-message"></p>
+                        <hr style="background-color: #bababa;">
+                        <p class="text-center">Or&nbsp;<a class="text-decoration-none" href="#">Forget password</a></p>
+                        <p class="text-center">Don't have an account? &nbsp;<a class="text-decoration-none" data-dismiss="modal" data-toggle="modal" data-target="#signup" href="#">Sign Up</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" role="dialog" tabindex="-1" id="signup">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Sign Up Now</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center"><button class="btn btn-primary text-left" style="width: 100%;" type="button"><i class="fa fa-facebook"></i>&nbsp; Continue with Facebook</button></div>
+                        <div class="text-center mt-2"><button class="btn btn-light text-left border-dark" style="width: 100%;" type="button"><i class="fa fa-google"></i>&nbsp; Continue with Google</button></div>
+                        <form class="mt-4" method="post" asp-controller="User" asp-action="Register">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text"><i class="fa fa-envelope-o"></i></span></div><input name="email" class="form-control" type="email" required placeholder="Email">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text"><i class="fa fa-lock"></i></span></div><input class="form-control" name="password" type="password" required placeholder="Password">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group"><button class="btn btn-primary btn-lg text-white" style="width: 100%;" type="submit">Sign Up</button></div>
+                        </form>
+                        <p class="text-danger" id="sign-up-error-message"></p>
+                        <hr style="background-color: #bababa;">
+                        <p class="text-center">Already have an Account?&nbsp;<a class="text-decoration-none" data-dismiss="modal" data-toggle="modal" data-target="#signin" href="#">Log In</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <section id="Footer">
+        <footer id="footer">
+            <div style="background: black; text-align: center; margin: 0px; padding:10px">
+                <p style="color:grey; font-family: raleway">Copyright (c) 2020 Noam Asafov</p>
+            </div>
+        </footer>
+    </section>
+
+
+    <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/js/bs-init.js" asp-append-version="true"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="~/js/Animated-Pretty-Product-List-v12.js" asp-append-version="true"></script>
+    <script src="~/js/Sidebar-Menu.js" asp-append-version="true"></script>
+    <script src="~/js/carousel.js" asp-append-version="true"></script>
+    <!--
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "/api/GetAllCategories",
+                type: "GET",
+                contentType: "application/json",
+                success: function (response) {
+                    response ? success(response) : fail();
+                }
+            });
+        });
+        function success(response) {
+            console.log(response.length);
+            for (var i = 0; i < response.length; i++) {
+                console.log(response[i].name);
+                $('#categorylist').append(
+                    '<a class="dropdown-item" role="presentation" style="color: #0b0000;" href="/home/category/' + response[i].id + '">'
+                    + response[i].name
+                    + '</a>'
+                );
+            }
+        };
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

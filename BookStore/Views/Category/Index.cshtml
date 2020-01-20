@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+    <div class="container my-2">
+        <div class="row">
+            <div class="col-12 align-content-end">
+                <a href="#" class="btn btn-primary float-right" data-toggle="modal" data-target="#categoryadd">Create</a>
+            </div>
+        </div>
+    </div>
+
+@if(Model==null || Model.Count() < 1)
+{
+    <p>No Category exist...</p>
+}
+else
+{
+<div class="container">
+
+    <table id="category-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Edit</th>
+                <th>Remove</th>
+
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var cat in Model)
+                {
+                <tr>
+                    <td class="@cat.Id">@cat.Name</td>
+                    <td>
+
+                        <a href="#" data-toggle="modal" data-target="#categoryedit" class="btn-open-mod" data-id=@cat.Id>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <td><a asp-controller="Category" asp-action="Remove" asp-route-id="@cat.Id"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                </tr>
+                 }
+            </tbody>
+    </table>
+</div>
+}
+
+
+
+
+<!--Form Add Category-->
+<div class="container-fluid">
+
+    <div class="modal fade" role="dialog" tabindex="-1" id="categoryadd">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Category</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" asp-controller="Category" asp-action="Create">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend"></div><input name="name" class="form-control" type="text" required="" placeholder="Name">
+                                <div class="input-group-append"></div>
+                            </div>
+                        </div>
+                        <div class="form-group"><button class="btn btn-primary btn-lg text-white" style="width: 100%;" type="submit">Create</button></div>
+                    </form>
+                    <hr style="background-color: #bababa;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" role="dialog" tabindex="-1" id="categoryedit">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Category</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" asp-controller="Category" asp-action="Edit">
+                        <input hidden name="categoryId" id="catId" value=""/>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend"></div><input name="name" id="catName" class="form-control" type="text" required="" placeholder="Name">
+                                <div class="input-group-append"></div>
+                            </div>
+                        </div>
+                        <div class="form-group"><button class="btn btn-primary btn-lg text-white" style="width: 100%;" type="submit">Edit</button></div>
+                    </form>
+                    <hr style="background-color: #bababa;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).on("click", ".btn-open-mod", function () {
+        var CatId = $(this).data('id');
+
+        var CatName = $('.' + CatId).text();
+        $(".modal-body #catId").val(CatId);
+        $(".modal-body #catName").val(CatName);
+});
+</script>

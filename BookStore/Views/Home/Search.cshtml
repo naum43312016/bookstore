@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Book>
+@{
+    ViewData["Title"] = "Search";
+    var error = @TempData["error"];
+    var sign = @TempData["sign"];
+    var pageN = (int)ViewData["currentPage"];
+    var pagesCount = (int)ViewData["pagesCount"];
+}
+
+
+<section id="home-page-section">
+    <div class="container">
+        <h2 style="font-family: Alegreya, serif;">Best Sellers</h2>
+        <div class="row product-list dev">
+            @foreach (var book in Model)
+            {
+                <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
+                    <div class="product-container">
+                        <div class="row">
+                            <div class="col-md-12"><a class="product-image" asp-controller="Home" asp-action="ProductDetails" asp-route-id="@book.Id"><img src="/../@book.Image"></a></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="height: 61px;">
+                                <h2><a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@book.Id">@book.Name</a></h2>
+                                <h2 style="font-size:16px;"><a asp-controller="Book" asp-action="Author" asp-route-author="@book.Author">@book.Author</a></h2>
+                            </div>
+                        </div>
+                        <div class="product-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i><a class="small-text">82 reviews</a></div>
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="product-description"></p>
+                                <div class="row">
+                                    <div class="col-6"><a class="btn btn-primary" asp-controller="Home" asp-action="ProductDetails" asp-route-id="@book.Id" style="padding-left: 5px;padding-right: 5px;">Details</a></div>
+                                    <div class="col-6">
+                                        <p class="product-price">$@book.Price</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <ul class="pagination">
+            @for (int i = 1; i <= pagesCount; i++)
+            {
+                if (i == pageN)
+                {
+                    <li class="page-item active"><a class="page-link" asp-controller="home" asp-action="index" asp-route-page="@i">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" asp-controller="home" asp-action="index" asp-route-page="@i">@i</a></li>
+                }
+            }
+        </ul>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        errorFunc();
+    });
+    function errorFunc() {
+        var error = '@Html.Raw(error)';
+        if (error.length > 1) {
+            var sign = '@Html.Raw(sign)';
+            console.log(sign);
+            if (sign == "signup") {
+                $("#signup").modal('toggle');
+                $("#sign-up-error-message").text(error);
+            }
+            if (sign === 'signin') {
+                $("#signin").modal('toggle');
+                $("#sign-in-error-message").text(error);
+            }
+        }
+    }
+</script>
